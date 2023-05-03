@@ -1,0 +1,28 @@
+{
+    "name": "caliex",
+    "version": "1.0.0",
+    "description": "A simple CLI to interact with Github REST API",
+    "main": "bin/index.js",
+    "scripts": {
+        "test": "mocha bin/test.js"
+    },
+    "keywords": [
+        "cli"
+    ],
+    "bin": {
+        "caliex": "bin/index.js"
+    },
+    "author": "Devanshu Mahapatra",
+    "license": "ISC",
+    "dependencies": {
+        "boxen": "^5.1.2",
+        "chai": "^4.3.7",
+        "chalk": "^4.1.2",
+        "commander": "^10.0.1",
+        "g": "^2.0.1",
+        "github-api": "^3.4.0",
+        "mocha": "^10.2.0",
+        "sinon": "^15.0.4",
+        "yargs": "^17.7.2"
+    }
+}
