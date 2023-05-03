@@ -112,30 +112,6 @@ yargs
         }
     })
 
-    .command('repo', 'Select Github Repository', {}, async (argv) => {
-        try {
-            const token = process.env.GITHUB_TOKEN // use your own Github access token
-            const url = 'https://api.github.com/user/repos'
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            }
-            const response = await axios.get(url, config)
-            const filteredRepos = response.data.filter((repo) =>
-                repo.name.includes(argv.url)
-            )
-            const repoUrls = filteredRepos.map((repo) => repo.git_url)
-            const successMessage = chalk.blueBright.bold(
-                `Repository URLs:\n${repoUrls.join('\n')}`
-            )
-            console.log(boxen(successMessage, { padding: 1, margin: 1 }))
-        } catch (error) {
-            console.error(error.message)
-        }
-    })
-
     .command(
         'delete-repo <owner> <repo>',
         'delete a Github repository',
@@ -179,13 +155,43 @@ yargs
             }
         }
     )
+    .command(
+        'get-repo-url <repo_name>',
+        'Get Github Repository URL',
+        {},
+        async (argv) => {
+            try {
+                const token = process.env.GITHUB_TOKEN // use your own Github access token
+                const url = 'https://api.github.com/user/repos'
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+                const response = await axios.get(url, config)
+                const filteredRepos = response.data.filter(
+                    (repo) => repo.name === argv.repo_name
+                )
+                if (filteredRepos.length === 0) {
+                    console.log(
+                        chalk.red(`Repository '${argv.repo_name}' not found.`)
+                    )
+                } else {
+                    const repoUrl = filteredRepos[0].git_url
+                    const successMessage = chalk.blueBright.bold(
+                        `Repository URL:\n${repoUrl}`
+                    )
+                    console.log(
+                        boxen(successMessage, { padding: 1, margin: 1 })
+                    )
+                }
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+    )
 
-    .option('url', {
-        alias: 'u',
-        describe: 'Get URL of a Github repository',
-        demandOption: false,
-        type: 'string',
-    })
     .option('license', {
         alias: 'l',
         describe: 'Add License to the repository',
