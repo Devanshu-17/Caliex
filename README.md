@@ -38,6 +38,10 @@ caliex <command> [options]
 ```bash
   caliex create-repo <name>          
 ```
+- You can also use the "-r" and "-l" option to create a readme and license file respectively:
+```bash
+  caliex create-repo <name> -r -l <license_name>
+```
 ####   - List all Github repositories 
 ```bash
   caliex list-repos                  
@@ -70,11 +74,9 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 If you wish to contribute to Caliex, please submit a pull request with your proposed changes. We welcome contributions from the community and will do our best to review and incorporate them into the project.
 
-## Authors
+## Author
 
-- [Devanshu-17](https://github.com/Devanshu-17)
-
-
+[Devanshu-17](https://github.com/Devanshu-17)
 
 ## Contact:
 
