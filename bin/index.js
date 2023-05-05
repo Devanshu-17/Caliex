@@ -8,7 +8,7 @@ const os = require('os')
 const welcomeMessage = chalk.blue.bold('Welcome to Caliex CLI!')
 
 const developedBy = chalk.blue.yellowBright(
-    'Developed with ❤️ by Devanshu Mahapatra'
+    'Developed with ❤️  by Devanshu Mahapatra'
 )
 
 yargs
