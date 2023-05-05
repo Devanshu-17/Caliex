@@ -3,6 +3,7 @@ const axios = require('axios')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const boxen = require('boxen')
+const os = require('os')
 
 const welcomeMessage = chalk.blue.bold('Welcome to Caliex CLI!')
 
@@ -18,19 +19,38 @@ yargs
     .usage('')
     //Add color to usage message
     .usage(chalk.magenta('Usage: $0 <command> [options]'))
+
     .command(
         'set-token <token>',
         'set your Github access token',
         {},
         async (argv) => {
             try {
-                process.env.GITHUB_TOKEN = argv.token
+                const token = argv.token
+                if (process.platform === 'win32') {
+                    // Set token as an environment variable in Windows
+                    const { execSync } = require('child_process')
+                    execSync(`setx GITHUB_TOKEN ${token}`)
+                } else {
+                    // Export token as an environment variable in macOS/Linux
+                    const { appendFileSync } = require('fs')
+                    const bashProfile =
+                        process.platform === 'darwin'
+                            ? '.bash_profile'
+                            : '.bashrc'
+                    const envVarLine = `export GITHUB_TOKEN=${token}\n`
+                    appendFileSync(
+                        `${process.env.HOME}/${bashProfile}`,
+                        envVarLine
+                    )
+                }
                 console.log(chalk.green.bold('Access token set successfully!'))
             } catch (error) {
                 console.error(chalk.red.bold(error.message))
             }
         }
     )
+
     .command(
         'create-repo <name>',
         'create a new Github repository',
@@ -50,7 +70,14 @@ yargs
         },
         async (argv) => {
             try {
-                const token = process.env.GITHUB_TOKEN // use your own Github access token
+                const token =
+                    process.env.GITHUB_TOKEN ||
+                    require('child_process')
+                        .execSync(
+                            'source ~/.bash_profile && echo $GITHUB_TOKEN'
+                        )
+                        .toString()
+                        .trim()
                 const url = 'https://api.github.com/user/repos'
                 const config = {
                     headers: {
@@ -77,7 +104,12 @@ yargs
 
     .command('list-repos', 'list all Github repositories', {}, async (argv) => {
         try {
-            const token = process.env.GITHUB_TOKEN // use your own Github access token
+            const token =
+                process.env.GITHUB_TOKEN ||
+                require('child_process')
+                    .execSync('source ~/.bash_profile && echo $GITHUB_TOKEN')
+                    .toString()
+                    .trim()
             const url = 'https://api.github.com/user/repos'
             let repos = []
             let page = 1
@@ -127,7 +159,14 @@ yargs
                     `Are you sure you want to delete ${argv.owner}/${argv.repo}? [y/n] `,
                     async (answer) => {
                         if (answer.toLowerCase() === 'y') {
-                            const token = process.env.GITHUB_TOKEN // use your own Github access token
+                            const token =
+                                process.env.GITHUB_TOKEN ||
+                                require('child_process')
+                                    .execSync(
+                                        'source ~/.bash_profile && echo $GITHUB_TOKEN'
+                                    )
+                                    .toString()
+                                    .trim()
                             const url = `https://api.github.com/repos/${argv.owner}/${argv.repo}`
                             const config = {
                                 headers: {
@@ -161,7 +200,14 @@ yargs
         {},
         async (argv) => {
             try {
-                const token = process.env.GITHUB_TOKEN // use your own Github access token
+                const token =
+                    process.env.GITHUB_TOKEN ||
+                    require('child_process')
+                        .execSync(
+                            'source ~/.bash_profile && echo $GITHUB_TOKEN'
+                        )
+                        .toString()
+                        .trim()
                 const url = 'https://api.github.com/user/repos'
                 const config = {
                     headers: {

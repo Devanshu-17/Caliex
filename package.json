@@ -1,6 +1,6 @@
 {
     "name": "caliex",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A simple CLI to interact with Github REST API",
     "main": "bin/index.js",
     "scripts": {
@@ -12,8 +12,18 @@
     "bin": {
         "caliex": "bin/index.js"
     },
-    "author": "Devanshu Mahapatra",
-    "license": "ISC",
+    "author": "Devanshu Mahapatra <devanshumahapatra17@gmail.com>",
+    "homepage": "https://github.com/Devanshu-17/Caliex",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/Devanshu-17/Caliex/blob/main/LICENSE"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Devanshu-17/Caliex.git"
+    },
     "dependencies": {
         "boxen": "^5.1.2",
         "chai": "^4.3.7",
