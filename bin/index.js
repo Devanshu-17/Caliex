@@ -74,7 +74,7 @@ yargs
                     process.env.GITHUB_TOKEN ||
                     require('child_process')
                         .execSync(
-                            'source ~/.bash_profile && echo $GITHUB_TOKEN'
+                            '~/.bash_profile && echo $GITHUB_TOKEN'
                         )
                         .toString()
                         .trim()
@@ -107,7 +107,7 @@ yargs
             const token =
                 process.env.GITHUB_TOKEN ||
                 require('child_process')
-                    .execSync('source ~/.bash_profile && echo $GITHUB_TOKEN')
+                    .execSync('~/.bash_profile && echo $GITHUB_TOKEN')
                     .toString()
                     .trim()
             const url = 'https://api.github.com/user/repos'
@@ -163,7 +163,7 @@ yargs
                                 process.env.GITHUB_TOKEN ||
                                 require('child_process')
                                     .execSync(
-                                        'source ~/.bash_profile && echo $GITHUB_TOKEN'
+                                        '~/.bash_profile && echo $GITHUB_TOKEN'
                                     )
                                     .toString()
                                     .trim()
@@ -204,7 +204,7 @@ yargs
                     process.env.GITHUB_TOKEN ||
                     require('child_process')
                         .execSync(
-                            'source ~/.bash_profile && echo $GITHUB_TOKEN'
+                            '~/.bash_profile && echo $GITHUB_TOKEN'
                         )
                         .toString()
                         .trim()
