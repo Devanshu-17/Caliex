@@ -6,6 +6,8 @@ A simple package developed using NodeJs and Github API in order to interact with
  <img src="https://user-images.githubusercontent.com/93381397/235945837-edbc195c-30c0-4d8d-a850-9152955ae749.png" alt="app-screen" width="800" height="500" />
 </p>
 
+[![npm](https://img.shields.io/npm/dt/caliex.svg)](https://www.npmjs.com/package/caliex) &nbsp; ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Devanshu-17/Caliex)
+
 
 ## Features
 
