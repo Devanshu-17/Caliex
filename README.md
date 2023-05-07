@@ -14,6 +14,12 @@ A simple package developed using NodeJs and Github API in order to interact with
 
 
 
+## Prerequisites:
+
+1. Install git
+2. create a ~/.bash_profile in your Home Directory
+
+
 ## Installation
 Install via NPM:
 
